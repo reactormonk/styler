@@ -1,3 +1,4 @@
+#require_relative 'stylist/style'
 module Stylist
 
   def new_stylist_for(model, context={})

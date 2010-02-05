@@ -1,13 +1,6 @@
 BareTest.suite "Stylist" do
   suite "Stylist" do
     suite "Style finding" do
-      setup do
-        class ::Foo; end
-        module ::Stylist; class Foo; def initialize(*args); end; end; end
-        module ::Bar; class Foo; end; end
-        module ::Stylist; module Bar; class Foo; def initialize(*args); end; end; end; end
-        module ::Bar; class Baz; end; end
-      end
       setup :model, "a model without namespace" do
         @model = Foo.new
         @result = Stylist::Foo
