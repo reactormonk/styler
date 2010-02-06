@@ -56,9 +56,10 @@ module Stylist
       def to_s
         prepare if respond_to?(:prepare)
         @context.merge!(model: @model)
-        render "stylist/#{model.class.to_s}/#{@type}", @context
+        render "stylist/#{__class__.to_s.gsub('::','/')}/#{@type}", @context
       end
 
+      alias_method :__class__, :class
       # I don't like this, but it's needed for routers that check the class if
       # you use resource-based routers (like CRUDtree).
       def class

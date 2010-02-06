@@ -13,9 +13,9 @@ BareTest.suite do
           end
           assert "it maps models to stylists in :assoc" do
             if @stylist.respond_to? :each
-              @stylist.all? {|style| style.is_a? @result_class}
+              @stylist.all? {|style| equal(style.__class__,@result_class)}
             else
-              @stylist.is_a? @result_class
+              equal(@stylist.__class__, @result_class)
             end
           end
         end

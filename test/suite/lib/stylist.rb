@@ -14,7 +14,7 @@ BareTest.suite "Stylist" do
         @result = nil
       end
       assert "#style_for finds the right Stylist object for :model" do
-        equal @result, Stylist.send(:style_for, @model)
+        equal(@result, Stylist.send(:style_for, @model))
       end
       assert "#new_stylist_for creates a new Style instance for :model" do
         @result = NilClass unless @result
