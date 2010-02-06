@@ -20,6 +20,12 @@ BareTest.suite do
           end
         end
         suite "#delegate" do
+          setup do
+            @stylist = Stylist.new_stylist_for(Model::Foo.new)
+          end
+          assert "it delegates to the model" do
+            equal :hello, @stylist.hello
+          end
         end
       end
       suite "InstanceMethods" do

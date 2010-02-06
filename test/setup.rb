@@ -10,6 +10,9 @@ module Model
     def fooz
       [Model::Bar::Foo.new, Model::Bar::Foo.new]
     end
+    def hello
+      :hello
+    end
   end
 end
 module Style
@@ -18,6 +21,7 @@ module Style
     style_for Model::Foo
     association :foo
     association :fooz
+    delegate :hello
     def context; {}; end
   end
 end
