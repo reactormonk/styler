@@ -9,10 +9,10 @@ module Stylist
             models = @model.send(m)
             if models.respond_to? :each
               models.map {|ele|
-                new_stylist_for(ele,context.merge({@model.class.to_s.downcase => self})) || ele
+                Stylist.new_stylist_for(ele,context.merge({@model.class.to_s.downcase => self})) || ele
               }
             else
-              new_stylist_for(models, context.merge({@model.class.to_s.downcase => self})) || models
+              Stylist.new_stylist_for(models, context.merge({@model.class.to_s.downcase => self})) || models
             end
           }
         end
