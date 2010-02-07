@@ -56,7 +56,7 @@ module Stylist
       def to_s
         prepare if respond_to?(:prepare)
         @context.merge!(model: @model)
-        render "stylist/#{__class__.to_s.gsub('::','/')}/#{@type}", @context
+        render "stylist/#{__class__.to_s.downcase.gsub('::','/')}/#{@type}", @context
       end
 
       alias_method :__class__, :class
