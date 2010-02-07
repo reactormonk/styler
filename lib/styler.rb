@@ -1,5 +1,5 @@
 require_relative 'stylist/style'
-module Stylist
+module Styler
   STYLES = {}
 
   def new_stylist_for(model, context={})

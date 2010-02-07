@@ -17,7 +17,7 @@ module Model
 end
 module Style
   class Foo
-    include Stylist::Style
+    include Styler::Style
     style_for Model::Foo
     association :foo
     association :fooz
@@ -33,7 +33,7 @@ module Model
 end
 module Style
   class Bar
-    include Stylist::Style
+    include Styler::Style
     style_for Model::Bar::Foo
     def context; {}; end
   end

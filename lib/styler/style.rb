@@ -1,4 +1,4 @@
-module Stylist
+module Styler
   module Style
     module ClassMethods
       # Add all the methods that will call other model instances here.
@@ -9,10 +9,10 @@ module Stylist
             models = @model.send(m)
             if models.respond_to? :each
               models.map {|ele|
-                Stylist.new_stylist_for(ele,context.merge({@model.class.to_s.downcase => self})) || ele
+                Styler.new_stylist_for(ele,context.merge({@model.class.to_s.downcase => self})) || ele
               }
             else
-              Stylist.new_stylist_for(models, context.merge({@model.class.to_s.downcase => self})) || models
+              Styler.new_stylist_for(models, context.merge({@model.class.to_s.downcase => self})) || models
             end
           }
         end
@@ -27,7 +27,7 @@ module Stylist
       end
 
       def style_for(model)
-        Stylist::STYLES.merge!({model => self})
+        Styler::STYLES.merge!({model => self})
       end
     end
   
