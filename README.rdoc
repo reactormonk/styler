@@ -1,0 +1,10 @@
+= Stylist
+
+== Summary
+
+This implements view-aware models, yet not. It's using the ProxyClass pattern.
+
+== See
+
+IRC::   #rango@irc.freenode.net
+Baretest:: http://github.com/apeiros/baretest
