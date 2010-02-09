@@ -5,15 +5,9 @@ module Styler
       # As there are no collection-styles, set up complicated stuff in :prepare
       def association(*methods)
         methods.each do |m|
-          define_method(m) {
-            models = @model.send(m)
-            if models.respond_to? :each
-              models.map {|ele|
-                Styler.new_stylist_for(ele,context.merge({@model.class.to_s.downcase => self})) || ele
-              }
-            else
-              Styler.new_stylist_for(models, context.merge({@model.class.to_s.downcase => self})) || models
-            end
+          define_method(m) {|*args, &block|
+            assoc = @model.send(m, *args, &block)
+            ::Styler.new_styler_for(assoc,context.merge({@model.class.to_s.downcase => self}))
           }
         end
       end

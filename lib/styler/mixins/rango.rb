@@ -6,7 +6,7 @@ module Styler
     module InstanceMethods
       def render(params)
         params.each do |key, value|
-          params[key] = (::Styler.new_style_for(value) || value)
+          params[key] = ::Styler.new_styler_for(value)
         end
       end
     end

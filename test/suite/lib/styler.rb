@@ -11,14 +11,20 @@ BareTest.suite "Styler" do
       end
       setup :model, "a model without style" do
         @model = Model::Baz.new
-        @result = nil
+        @result = Model::Baz
+      end
+      setup :model, "a model collection" do
+        @model = [Model::Foo.new, Model::Bar::Foo.new, Model::Foo.new, Model::Baz.new]
+        @result = [Style::Foo, Style::Bar, Style::Foo, Model::Baz]
       end
       assert "#style_for finds the right Styler object for :model" do
-        equal(@result, Styler.send(:style_for, @model))
-      end
-      assert "#new_stylist_for creates a new Style instance for :model" do
-        @result = NilClass unless @result
-        Styler.new_stylist_for(@model).is_a? @result
+        if @model.respond_to? :each
+          @model.each_with_index.all?{ |model,id|
+            Styler.send(:model_to_style, model, {}).is_a? @result[id]
+          }
+        else
+          Styler.send(:model_to_style, @model, {}).is_a? @result
+        end
       end
     end
   end

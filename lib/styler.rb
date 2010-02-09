@@ -1,19 +1,19 @@
-require_relative 'stylist/style'
+require_relative 'styler/style'
 module Styler
   STYLES = {}
 
-  def new_stylist_for(model, context={})
-    if (style = style_for(model))
-      style.new(model, context)
+  def new_styler_for(model, context={})
+    if model.respond_to? :each
+      model.map {|ele| model_to_style(ele, context)}
     else
-      nil
+      model_to_style(model, context)
     end
   end
 
   private
 
-  def style_for(model)
-    STYLES[model.class]
+  def model_to_style(model, context)
+    (style = STYLES[model.class]) ? style.new(model, context) : model
   end
 
   extend self
