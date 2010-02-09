@@ -1,3 +1,4 @@
+require 'styler'
 module Styler
   module RangoMixin
     module ClassMethods
