@@ -47,10 +47,10 @@ module Styler
       end
 
       # This is the final hook, define :prepare if you need to add some stuff
-      # Set @template if you want a custom path.
+      # Set @template_path if you want a custom path.
       def to_s
         prepare if respond_to?(:prepare)
-        render @template || compile_template_path
+        render @template_path || compile_template_path
       end
 
       # This method compiles the default template path.
