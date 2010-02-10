@@ -2,7 +2,7 @@ require_relative 'styler/style'
 module Styler
   STYLES = {}
 
-  def new_styler_for(model, context={})
+  def new_style_for(model, context={})
     if model.respond_to? :each
       model.map {|ele| model_to_style(ele, context)}
     else

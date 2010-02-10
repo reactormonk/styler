@@ -2,6 +2,17 @@ $LOAD_PATH.unshift(File.expand_path("#{__FILE__}/../../lib")) # Add PROJECT/lib 
 require 'styler'
 require 'ruby-debug'
 
+# I don't like adding dependencies if I don't need to :-)
+module Styler::Style
+  module InstanceMethods
+    def render(*args)
+      [ args,
+        Hash[instance_variables.map {|name| [name, instance_variable_get(name)]} ]
+      ]
+    end
+  end
+end
+
 module Model
   class Foo
     def foo
@@ -35,7 +46,6 @@ module Style
   class Bar
     include Styler::Style
     style_for Model::Bar::Foo
-    def context; {}; end
   end
 end
 module Model

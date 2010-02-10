@@ -7,7 +7,7 @@ module Styler
         methods.each do |m|
           define_method(m) {|*args, &block|
             assoc = @model.send(m, *args, &block)
-            ::Styler.new_styler_for(assoc,context.merge({@model.class.to_s.downcase => self}))
+            ::Styler.new_style_for(assoc,serialize_to_hash.merge({@model.class.to_s.downcase.split('::').last => self}))
           }
         end
       end
@@ -27,9 +27,9 @@ module Styler
   
     module InstanceMethods
       def initialize(model, context={})
+        serialize_from_hash(context)
         @model = model
-        @type = :default
-        @context = context
+        @type ||= :default
       end
 
       attr_reader :model
@@ -41,7 +41,7 @@ module Styler
       end
 
       def with(context)
-        @context.merge!(context)
+        serialize_from_hash(context)
         self
       end
 
@@ -49,15 +49,28 @@ module Styler
       # to the @context.
       def to_s
         prepare if respond_to?(:prepare)
-        @context.merge!(model: @model)
-        render "#{__class__.to_s.downcase.gsub('::','/')}/#{@type}", @context
+        render "#{__class__.to_s.downcase.gsub('::','/')}/#{@type}"
       end
+
+      # Use this method to add something to the context
 
       alias_method :__class__, :class
       # I don't like this, but it's needed for routers that check the class if
       # you use resource-based routers (like CRUDtree).
       def class
         @model.class
+      end
+
+      private
+      def serialize_from_hash(hash)
+        hash.each {|key,value|
+          name = (key.to_s =~ /^@/) ? key.to_s : "@#{key}"
+          instance_variable_set(name, value)
+        }
+      end
+
+      def serialize_to_hash
+        Hash[instance_variables.map {|name| [name, instance_variable_get(name)]}]
       end
     end
   

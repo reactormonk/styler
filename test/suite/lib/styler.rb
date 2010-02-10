@@ -17,13 +17,13 @@ BareTest.suite "Styler" do
         @model = [Model::Foo.new, Model::Bar::Foo.new, Model::Foo.new, Model::Baz.new]
         @result = [Style::Foo, Style::Bar, Style::Foo, Model::Baz]
       end
-      assert "#style_for finds the right Styler object for :model" do
+      assert "#new_style_for finds the right Styler object for :model" do
         if @model.respond_to? :each
           @model.each_with_index.all?{ |model,id|
-            Styler.send(:model_to_style, model, {}).is_a? @result[id]
+            Styler.new_style_for(model, {}).is_a? @result[id]
           }
         else
-          Styler.send(:model_to_style, @model, {}).is_a? @result
+          Styler.new_style_for(@model, {}).is_a? @result
         end
       end
     end
