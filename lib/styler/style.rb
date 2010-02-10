@@ -47,9 +47,15 @@ module Styler
       end
 
       # This is the final hook, define :prepare if you need to add some stuff
+      # Set @template if you want a custom path.
       def to_s
         prepare if respond_to?(:prepare)
-        render "#{__class__.to_s.downcase.gsub('::','/')}/#{@type}"
+        render @template || compile_template_path
+      end
+
+      # This method compiles the default template path.
+      def compile_template_path
+        "#{__class__.to_s.downcase.gsub('::','/')}/#{@type}"
       end
 
       alias_method :__class__, :class
