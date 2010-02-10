@@ -40,19 +40,17 @@ module Styler
         self
       end
 
+      # Use this method to add something to the context
       def with(context)
         serialize_from_hash(context)
         self
       end
 
       # This is the final hook, define :prepare if you need to add some stuff
-      # to the @context.
       def to_s
         prepare if respond_to?(:prepare)
         render "#{__class__.to_s.downcase.gsub('::','/')}/#{@type}"
       end
-
-      # Use this method to add something to the context
 
       alias_method :__class__, :class
       # I don't like this, but it's needed for routers that check the class if
