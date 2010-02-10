@@ -35,6 +35,12 @@ BareTest.suite do
             @style = ::Styler.new_style_for(@model)
             @result = [["style/foo/default"], {:@model => @model, :@type => :default}]
           end
+          setup :style, "a complex style" do
+            @model = Model::Foo.new
+            @style = ::Styler.new_style_for(@model)
+            @style.with(:bla => "foo")
+            @result = [["style/foo/default"], {:@model => @model, :@type => :default, :@bla => "foo"}]
+          end
           assert "it renders correctly" do
             equal(@result, @style.to_s)
           end
