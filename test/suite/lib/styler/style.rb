@@ -48,7 +48,7 @@ BareTest.suite do
             @style = style.foo
             @result = [["style/bar/default"], {:@foo => style, :@model => @style.model, :@type => :default, :@bla => "foo"}]
           end
-          assert "it renders correctly" do
+          assert "it renders :style correctly" do
             equal(@result, @style.to_s)
           end
         end
