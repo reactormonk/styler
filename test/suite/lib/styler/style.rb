@@ -4,18 +4,18 @@ BareTest.suite do
       suite "ClassMethods" do
         suite "#association" do
           setup :assoc, "a single association" do
-            @styler = Styler.new_style_for(Model::Foo.new).foo
+            @style = Styler.new_style_for(Model::Foo.new).foo
             @result_class = Style::Bar
           end
           setup :assoc, "an association collection" do
-            @styler = Styler.new_style_for(Model::Foo.new).fooz
+            @style = Styler.new_style_for(Model::Foo.new).fooz
             @result_class = Style::Bar
           end
           assert "it maps models to stylers in :assoc" do
-            if @styler.respond_to? :each
-              @styler.all? {|style| equal(style.__class__,@result_class)}
+            if @style.respond_to? :each
+              @style.all? {|style| equal(style.__class__,@result_class)}
             else
-              equal(@styler.__class__, @result_class)
+              equal(@style.__class__, @result_class)
             end
           end
         end
