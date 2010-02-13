@@ -1,3 +1,4 @@
+require 'rango/mixins/rendering'
 require 'styler'
 module Styler
   module Style
