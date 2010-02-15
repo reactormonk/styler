@@ -32,7 +32,7 @@ module Styler
         @type ||= :default
       end
 
-      attr_reader :model
+      attr_reader :model, :request
 
       # Use like style.as(:widget)
       def as(type)
@@ -50,7 +50,7 @@ module Styler
       # Set @template_path if you want a custom path.
       def to_s
         prepare if respond_to?(:prepare)
-        render @template_path || compile_template_path
+        render(@template_path || compile_template_path)
       end
 
       # This method compiles the default template path.
