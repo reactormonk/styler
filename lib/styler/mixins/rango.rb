@@ -14,7 +14,7 @@ module Styler
     def render(template)
       @request = request
       instance_variables.each {|name|
-        instance_variable_set(name,::Styler.new_style_for(instance_variabel_get(name)))
+        instance_variable_set(name,::Styler.new_style_for(instance_variable_get(name)))
       }
       super
     end
