@@ -24,7 +24,7 @@ module Styler
         Styler::STYLES.merge!({model => self})
       end
     end
-  
+
     module InstanceMethods
       def initialize(model, context={})
         serialize_from_hash(context)
@@ -77,7 +77,7 @@ module Styler
         Hash[instance_variables.map {|name| [name, instance_variable_get(name)]}]
       end
     end
-  
+
     def self.included(receiver)
       receiver.extend         ClassMethods
       receiver.send :include, InstanceMethods
