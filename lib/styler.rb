@@ -3,7 +3,7 @@ module Styler
   STYLES = {}
 
   def new_style_for(model, context={})
-    if model.respond_to? :each
+    if model.respond_to? :map
       model.map {|ele| model_to_style(ele, context)}
     else
       model_to_style(model, context)
