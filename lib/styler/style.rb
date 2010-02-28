@@ -20,6 +20,14 @@ module Styler
         end
       end
 
+      def delegate_to_controller(*methods)
+        methods.each do |m|
+          define_method(m) {
+            @__controller.send(m)
+          }
+        end
+      end
+
       def style_for(model)
         Styler::STYLES.merge!({model => self})
       end
@@ -81,6 +89,7 @@ module Styler
     def self.included(receiver)
       receiver.extend         ClassMethods
       receiver.send :include, InstanceMethods
+      receiver.delegate_to_controller :request
     end
   end
 end
