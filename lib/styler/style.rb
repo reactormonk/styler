@@ -29,6 +29,11 @@ module Styler
       end
 
       def style_for(model)
+        model.instance_methods.each do |method|
+          unless method_defined? method
+            define_method(method) {|*args| @model.send(method, *args)}
+          end
+        end
         Styler::STYLES.merge!({model => self})
       end
     end
