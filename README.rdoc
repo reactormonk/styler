@@ -8,3 +8,22 @@ This implements view-aware models, yet not. It's using the ProxyClass pattern.
 
 IRC::   #rango@irc.freenode.net
 Baretest:: http://github.com/apeiros/baretest
+
+== Description
+
+You use Styler::RangoMixin to render (or any other mixin). Call the render
+method with (template, *model_instance_variables), and it will replace the
+mentioned instance variables with Styles. You can use Style variables simply
+by calling #to_s on them (HAML does that by default). The template path for the
+Style is compiled by using 
+
+"#{__class__.to_s.downcase.gsub('::','/')}/#{@type}"
+
+where @type is :default by default. Choose any other by calling #as(type).
+If you want to add any context, pass them as a hash and they will be avaible
+as instance variables.
+If you need to delegate more methods to model/controller use #delegate and
+#delegate_to_controller. There's a special #association delegater method
+avaible which handles context passing and so on.
+
+I'm not yet sure what happens if you use this for collections. Gotta try that.
