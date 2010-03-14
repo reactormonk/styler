@@ -2,9 +2,8 @@ require 'rango/mixins/rendering'
 require 'styler'
 module Styler
   module Style
-    module InstanceMethods
-      include Rango::ImplicitRendering
-    end
+    include Rango::Helpers
+    include Rango::ImplicitRendering
   end
 end
 
