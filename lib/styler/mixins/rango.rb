@@ -16,7 +16,7 @@ module Styler
       models.each {|name|
         instance_variable_set("@#{name}",::Styler.new_style_for(instance_variable_get("@#{name}")))
       }
-      super
+      super(template)
     end
   end
 end
