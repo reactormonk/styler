@@ -3,7 +3,7 @@
  
 Gem::Specification.new do |s|
   s.name = "styler"
-  s.version = "0.1.1"
+  s.version = "0.1.2"
   s.authors = ["Simon Hafner aka Tass"]
   s.homepage = "http://github.com/Tass/styler"
   s.summary = "This implements view-aware models, yet not."
