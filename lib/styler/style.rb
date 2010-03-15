@@ -14,16 +14,16 @@ module Styler
 
       def delegate(*methods)
         methods.each do |m|
-          define_method(m) {
-            @model.send(m)
+          define_method(m) { |*args|
+            @model.send(m, *args)
           }
         end
       end
 
       def delegate_to_controller(*methods)
         methods.each do |m|
-          define_method(m) {
-            @__controller.send(m)
+          define_method(m) { |*args|
+            @__controller.send(m, *args)
           }
         end
       end
