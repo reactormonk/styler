@@ -42,14 +42,14 @@ module Styler
       def initialize(model, context={})
         serialize_from_hash(context)
         @model = model
-        @type ||= :default
+        @__type ||= :default
       end
 
       attr_reader :model, :request
 
       # Use like style.as(:widget)
       def as(type)
-        @type = type
+        @__type = type
         self
       end
 
@@ -68,7 +68,7 @@ module Styler
 
       # This method compiles the default template path.
       def compile_template_path
-        "#{__class__.to_s.downcase.gsub('::','/')}/#{@type}"
+        "#{__class__.to_s.downcase.gsub('::','/')}/#{@__type}"
       end
 
       alias_method :__class__, :class

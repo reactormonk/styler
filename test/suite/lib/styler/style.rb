@@ -33,20 +33,20 @@ BareTest.suite do
           setup :style, "a style" do
             @model = Model::Foo.new
             @style = ::Styler.new_style_for(@model)
-            @result = [["style/foo/default"], {:@model => @model, :@type => :default}]
+            @result = [["style/foo/default"], {:@model => @model, :@__type => :default}]
           end
           setup :style, "a complex style" do
             @model = Model::Foo.new
             @style = ::Styler.new_style_for(@model)
             @style.with(:bla => "foo")
-            @result = [["style/foo/default"], {:@model => @model, :@type => :default, :@bla => "foo"}]
+            @result = [["style/foo/default"], {:@model => @model, :@__type => :default, :@bla => "foo"}]
           end
           setup :style, "a style with context" do
             model = Model::Foo.new
             style = ::Styler.new_style_for(model)
             style.with(:bla => "foo")
             @style = style.foo
-            @result = [["style/bar/default"], {:@foo => style, :@model => @style.model, :@type => :default, :@bla => "foo"}]
+            @result = [["style/bar/default"], {:@foo => style, :@model => @style.model, :@__type => :default, :@bla => "foo"}]
           end
           assert "it renders :style correctly" do
             equal(@result, @style.to_s)
