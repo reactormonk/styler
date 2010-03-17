@@ -7,21 +7,8 @@ module Styler
   end
 end
 
-module Styler
-  module RangoMixin
-    include Rango::ImplicitRendering
-    def render(template, *models)
-      models.each {|name|
-        instance_variable_set(
-          "@#{name}",
-          ::Styler.new_style_for(
-            instance_variable_get("@#{name}"),
-            {__controller: self}
-          )
-        )
-      }
-      super(template)
-    end
+module Rango::Helpers
+  def style(model)
+    Styler.new_style_for(model)
   end
 end
-
