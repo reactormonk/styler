@@ -9,6 +9,6 @@ end
 
 module Rango::Helpers
   def style(model)
-    Styler.new_style_for(model)
+    Styler.new_style_for(model, __controller: self)
   end
 end
