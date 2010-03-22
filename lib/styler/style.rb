@@ -68,7 +68,7 @@ module Styler
 
       # This method compiles the default template path.
       def compile_template_path
-        "#{__class__.to_s.downcase.gsub('::','/')}/#{@__type}"
+        "#{__class__.to_s.snake_case.gsub('::','/')}/#{@__type}"
       end
 
       alias_method :__class__, :class
@@ -96,5 +96,14 @@ module Styler
       receiver.send :include, InstanceMethods
       receiver.delegate_to_controller :request
     end
+  end
+end
+
+class String
+  def snake_case
+    return downcase if match(/\A[A-Z]+\z/)
+    gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2').
+    gsub(/([a-z])([A-Z])/, '\1_\2').
+    downcase
   end
 end
